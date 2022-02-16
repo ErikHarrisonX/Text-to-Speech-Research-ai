@@ -1,0 +1,37 @@
+#Import and use library for speech
+import pyttsx3
+#library for research
+import wikipedia
+#Function for the speaking part
+def Speak_Research():
+    user_topic = input("What would you like to research?\n")
+    raw_research = wikipedia.summary(user_topic, sentences = 3)
+    converter = pyttsx3.init()
+    speaker_rate = 142 #Set rate of talking speed (0 = slower - 200 = faster)
+    converter.setProperty('rate', speaker_rate)
+    print("")
+    converter.setProperty('volume', 0.7) #Set volume from 0 to 1, can also be over 1
+    #Set voice of speech, can be gender, adult, accent, etc
+    voice_id = "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech\Voices\Tokens\TTS_MS_EN-US_ZIRA_11.0"
+    converter.setProperty('voice', voice_id)
+
+#output part
+    converter.say("Your research on " + user_topic + " is as follows: ")
+    print("Your research is " + user_topic + " which is: \n")
+    print("_" * 45)
+    print(raw_research)
+    print("_" * 45)
+    print("\n")
+    #This allows for the voice to say the text
+    converter.say(raw_research)
+    converter.runAndWait()
+
+#Made it into a function to make it easier to loop
+Speak_Research()
+#Loops
+Repeat = input("Would you like to reseach another thing?(Y/N)\n")
+if Repeat == "Y":
+    Speak_Research()
+Repeat1 = input("Would you like to reseach another thing?(Y/N)\n")
+if Repeat1 == "Y":
+    Speak_Research()
